@@ -1,0 +1,17 @@
+version: '2'
+services:
+  db:
+    image: mdillon/postgis:9.5
+    ports:
+      - "0.0.0.0:5432:5432"
+  web:
+    build:
+      context: .
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+    volumes:
+      - .:/app
+    ports:
+      - "0.0.0.0:3000:3000"
